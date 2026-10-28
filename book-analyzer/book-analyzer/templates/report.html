@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book Analyzer — Report</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="spines" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="report-wrap">
+
+    <div class="report-header">
+      <div>
+        <span class="eyebrow">Reading Dossier</span>
+        <h1>Book Analyzer Report</h1>
+      </div>
+      <div class="stamp">Analyzed</div>
+    </div>
+
+    <div class="dossier">
+
+      <!-- Left column: at-a-glance metadata -->
+      <div>
+        <div class="card">
+          <h2>Short Description</h2>
+          <p class="blurb-text">{{ short_description }}</p>
+        </div>
+
+        <div class="card">
+          <h2>Genres</h2>
+          <div class="genre-row">
+            {% for g in genres %}
+              <span class="genre-tag">{{ g }}</span>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Readability</h2>
+          <div class="readability-score">{{ readability | round(1) }}</div>
+          <div class="readability-label">
+            {% if readability >= 90 %}Very easy
+            {% elif readability >= 70 %}Easy
+            {% elif readability >= 60 %}Fairly easy
+            {% elif readability >= 50 %}Standard
+            {% elif readability >= 30 %}Fairly difficult
+            {% else %}Difficult
+            {% endif %}
+            · Flesch reading ease
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column: summary, keywords, quotes -->
+      <div>
+        <div class="card">
+          <h2>Summary</h2>
+          <p class="summary-text">{{ summary }}</p>
+        </div>
+
+        <div class="card">
+          <h2>Keywords</h2>
+          <ul class="keyword-list">
+            {% for kw in keywords %}
+              <li>{{ kw[0] }}<span class="count">×{{ kw[1] }}</span></li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Quotes</h2>
+          {% for q in quotes %}
+            <blockquote class="quote-block">{{ q }}</blockquote>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Chapter-wise insights -->
+    <h2 class="toc-heading">Chapter-wise Insights</h2>
+
+    {% for ch in chapters %}
+      <details class="chapter-entry">
+        <summary>
+          <span class="num">{{ '%02d' | format(ch.chapter) }}</span>
+          <span class="title">Chapter {{ ch.chapter }}</span>
+          <span class="meta">readability {{ ch.readability | round(1) }}</span>
+          <span class="toggle">+</span>
+        </summary>
+        <div class="chapter-body">
+          <span class="ch-label">Summary</span>
+          <p>{{ ch.summary }}</p>
+
+          <span class="ch-label">Keywords</span>
+          <div class="ch-keywords">
+            {% for kw in ch.keywords %}
+              <span>{{ kw[0] }} ×{{ kw[1] }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </details>
+    {% endfor %}
+
+  </div>
+
+</body>
+</html>

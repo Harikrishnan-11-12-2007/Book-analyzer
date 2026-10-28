@@ -1,0 +1,439 @@
+/* ============================================================
+   Book Analyzer — "Reading Room" design system
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  --paper: #f3ecdb;
+  --paper-dark: #e8ddc3;
+  --ink: #2a2118;
+  --maroon: #7a2e2e;
+  --maroon-dark: #5c2222;
+  --forest: #34503f;
+  --gold: #b8893b;
+  --muted: #8b8175;
+  --line: rgba(42, 33, 24, 0.18);
+
+  --display: 'Fraunces', serif;
+  --body: 'Inter', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 27px, var(--line) 28px);
+}
+
+a { color: var(--maroon); }
+
+/* ---------- Bookshelf spine decoration ---------- */
+
+.spines {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: 26px;
+  display: flex;
+  flex-direction: column;
+  z-index: 0;
+}
+
+.spines span {
+  display: block;
+  flex: 1 1 auto;
+}
+
+.spines span:nth-child(1) { background: var(--maroon); }
+.spines span:nth-child(2) { background: var(--forest); }
+.spines span:nth-child(3) { background: var(--gold); }
+.spines span:nth-child(4) { background: var(--ink); }
+.spines span:nth-child(5) { background: var(--maroon-dark); }
+.spines span:nth-child(6) { background: var(--forest); }
+.spines span:nth-child(7) { background: var(--gold); }
+
+/* ============================================================
+   Upload page
+   ============================================================ */
+
+.upload-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 40px 40px 80px;
+  position: relative;
+}
+
+.ticket {
+  background: var(--paper-dark);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 40px rgba(42, 33, 24, 0.18);
+  width: 100%;
+  max-width: 460px;
+  padding: 40px 38px 34px;
+  position: relative;
+}
+
+.ticket::before {
+  /* punched library-card hole */
+  content: '';
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.ticket-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.ticket h1 {
+  font-family: var(--display);
+  font-size: 34px;
+  font-weight: 600;
+  margin: 6px 0 2px;
+  color: var(--ink);
+}
+
+.ticket .tagline {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--forest);
+  margin: 0 0 26px;
+}
+
+.ticket-rule {
+  border: none;
+  border-top: 1px dashed var(--muted);
+  margin: 18px 0;
+}
+
+.field-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.file-drop {
+  border: 1px solid var(--line);
+  background: var(--paper);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.file-drop input[type="file"] {
+  font-family: var(--body);
+  font-size: 13px;
+  width: 100%;
+  color: var(--ink);
+}
+
+.file-drop input[type="file"]::file-selector-button {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  padding: 8px 12px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.btn-submit {
+  width: 100%;
+  margin-top: 22px;
+  background: var(--maroon);
+  color: var(--paper);
+  border: none;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  padding: 14px 0;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn-submit:hover { background: var(--maroon-dark); }
+
+.ticket-footer {
+  margin-top: 20px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+}
+
+.error-banner {
+  background: var(--maroon);
+  color: var(--paper);
+  font-family: var(--body);
+  font-size: 14px;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  border-left: 4px solid var(--ink);
+}
+
+/* ============================================================
+   Report page
+   ============================================================ */
+
+.report-wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 48px 32px 80px 80px;
+  position: relative;
+}
+
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 18px;
+  margin-bottom: 32px;
+}
+
+.report-header .eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.report-header h1 {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 600;
+  margin: 4px 0 0;
+}
+
+.stamp {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--maroon);
+  border: 2px solid var(--maroon);
+  padding: 8px 14px;
+  transform: rotate(6deg);
+  text-transform: uppercase;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+
+.dossier {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .dossier { grid-template-columns: 1fr; }
+  .report-wrap { padding-left: 40px; }
+  .upload-wrap { padding-left: 50px; }
+}
+
+.card {
+  background: var(--paper-dark);
+  border: 1px solid var(--line);
+  padding: 22px 24px;
+  margin-bottom: 22px;
+}
+
+.card h2 {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 14px;
+}
+
+.blurb-text {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.genre-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.genre-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--forest);
+  color: var(--paper);
+  padding: 4px 9px;
+}
+
+.readability-score {
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.readability-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--maroon);
+  letter-spacing: 0.06em;
+}
+
+.summary-text {
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.keyword-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.keyword-list li {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 5px 10px;
+}
+
+.keyword-list li .count {
+  color: var(--maroon);
+  margin-left: 5px;
+}
+
+.quote-block {
+  border-left: 3px solid var(--gold);
+  padding: 4px 0 4px 16px;
+  margin: 0 0 14px;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.quote-block:last-child { margin-bottom: 0; }
+
+/* ---------- Table of contents / chapters ---------- */
+
+.toc-heading {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 600;
+  margin: 36px 0 14px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 10px;
+}
+
+.chapter-entry {
+  border-bottom: 1px dashed var(--line);
+}
+
+.chapter-entry summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 4px;
+  cursor: pointer;
+  font-family: var(--body);
+}
+
+.chapter-entry summary::-webkit-details-marker { display: none; }
+
+.chapter-entry summary .num {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--maroon);
+  width: 28px;
+}
+
+.chapter-entry summary .title {
+  font-weight: 600;
+  flex: 1;
+}
+
+.chapter-entry summary .meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.chapter-entry summary .toggle {
+  font-family: var(--mono);
+  color: var(--muted);
+  transition: transform 0.15s ease;
+}
+
+.chapter-entry[open] summary .toggle { transform: rotate(45deg); }
+
+.chapter-body {
+  padding: 0 4px 18px 44px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.chapter-body .ch-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.chapter-body .ch-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 4px 0 14px;
+}
+
+.chapter-body .ch-keywords span {
+  font-family: var(--mono);
+  font-size: 11px;
+  background: var(--paper-dark);
+  border: 1px solid var(--line);
+  padding: 3px 8px;
+}

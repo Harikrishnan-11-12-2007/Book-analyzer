@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book Analyzer — Upload</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="spines" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="upload-wrap">
+    <div class="ticket">
+      <span class="ticket-eyebrow">Borrower's Ticket · No. 0001</span>
+      <h1>Book Analyzer</h1>
+      <p class="tagline">Every book has a shape. Let's trace yours.</p>
+
+      {% if error %}
+        <div class="error-banner">{{ error }}</div>
+      {% endif %}
+
+      <form method="post" enctype="multipart/form-data">
+        <label class="field-label" for="file">Manuscript (PDF only)</label>
+        <div class="file-drop">
+          <input type="file" id="file" name="file" accept=".pdf" class="form-control" required>
+        </div>
+
+        <hr class="ticket-rule">
+
+        <button type="submit" class="btn-submit">Analyze Book →</button>
+      </form>
+
+      <div class="ticket-footer">
+        <span>FORMAT: PDF</span>
+        <span>ISSUED: BOOK ANALYZER</span>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
